@@ -21,7 +21,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
-import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -46,8 +45,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { FilterPipe } from './filter.pipe';
-import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { PaymentComponent } from './components/modals/payment/payment.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -67,7 +64,6 @@ registerLocaleData(en);
     LoginComponent,
     RegisterComponent,
     MonthlyChargesComponent,
-    FilterPipe,
     PaymentComponent,
   ],
   imports: [
@@ -96,7 +92,6 @@ registerLocaleData(en);
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    AngularFireMessagingModule,
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: false,
     //   // Register the ServiceWorker as soon as the app is stable
@@ -111,7 +106,7 @@ registerLocaleData(en);
     NzFormModule,
     MatChipsModule,
   ],
-  providers: [ScreenTrackingService, UserTrackingService, { provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
