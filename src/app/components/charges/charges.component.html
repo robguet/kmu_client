@@ -1,0 +1,74 @@
+<h4 class="title">Gastos</h4>
+
+<div class="div-container">
+  <div class="charges-div">
+    <div class="row-container" *ngIf="enumColors">
+      <div class="card-charge" *ngFor="let card of chargesGraph">
+        <div>
+          <h2>{{ card.name }}</h2>
+          <h2>{{ card.money | currency }}</h2>
+        </div>
+        <span style.color="{{ enumColors[card.name] }}" class="material-icons md-36 cl-15 center">
+          {{ enumIcons[card.name] }}</span
+        >
+        <!-- <nz-progress
+          style="zoom: 0.6"
+          [nzPercent]="card.percent"
+          nzType="circle"
+        ></nz-progress> -->
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="flex-evenly">
+    <nz-range-picker
+      [nzPopupStyle]="datePickerStyle"
+      nzMode="month"
+      [(ngModel)]="dateRangePicker"
+      (ngModelChange)="handleOnChangeDate($event)"
+    ></nz-range-picker>
+
+    <nz-select [(ngModel)]="optionSelected" (ngModelChange)="handleCategoryOnChange($event)">
+      <nz-option nzValue="0" nzLabel="Todo"></nz-option>
+      <nz-option
+        *ngFor="let category of categories"
+        [nzValue]="category.idCategory"
+        [nzLabel]="category.label"
+      ></nz-option>
+    </nz-select>
+
+    <nz-select [(ngModel)]="methodPaymentOptionSelected" (ngModelChange)="handlePaymentMethodOnChange($event)">
+      <nz-option nzValue="0" nzLabel="Todas"></nz-option>
+      <nz-option
+        *ngFor="let category of creditCards"
+        [nzLabel]="category.label ? category.label : null"
+        [nzValue]="category.fk_idCard ? category.fk_idCard : null"
+      ></nz-option>
+    </nz-select>
+  </div>
+
+  <div class="flex-between align-center" style="padding: 0 11px">
+    <div>
+      <h4>Gastado</h4>
+    </div>
+    <label for="amount"> {{ totalBalance | currency }}</label>
+  </div>
+  <hr />
+  <div></div>
+  <div style="margin-top: 20px">
+    <div *ngFor="let charge of charges">
+      <div style="margin-top: 30px; display: flex" id="swiped-left">
+        <span class="material-icons md-36 cl-15 center" style.color="{{ charge?.color }}"> {{ charge.icon }}</span>
+
+        <div class="cl-45 left">
+          <h1>{{ charge.title }}</h1>
+          <label>{{ charge.method }}</label>
+        </div>
+
+        <span class="cl-15 center">${{ charge?.money }}</span>
+
+        <label class="cl-25 center">{{ charge.date | date: 'mediumDate':'UTC' }}</label>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.container-tabs {
+  display: flex;
+  justify-content: center;
+  height: 12vh;
+  display: flex;
+  position: fixed;
+  border-top: 1px solid #ffff;
+  width: 100%;
+  z-index: 9;
+  box-shadow: rgb(0 0 0 / 24%) 0px 6px 16px;
+  background-color: white;
+}
+
+.container-tabs button {
+  background-color: white;
+  border: none;
+}
+
+.box-style {
+  width: 25%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(255, 115, 29);
+  font-size: 26px;
+}
+
+.button-span {
+  font-size: 13px;
+}
+
+.is-active {
+  background-color: #ff731d;
+  color: white;
+  border-radius: 50%;
+  width: 12vh;
+  height: 12vh;
+}

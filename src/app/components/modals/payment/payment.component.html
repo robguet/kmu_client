@@ -1,0 +1,19 @@
+<div>
+  <div class="flex">
+    <h4>{{ data.label }}</h4>
+  </div>
+
+  <div class="flex">
+    <h3>Debes: &nbsp;</h3>
+    <h3>{{ data.pendingBalance }}</h3>
+  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Cantidad a pagar</mat-label>
+    <input [(ngModel)]="amount" type="number" matInput placeholder="Total" />
+  </mat-form-field>
+
+  <br />
+  <button (click)="handleMakePayment()" mat-raised-button>Pagar</button>
+  <br />
+  <span class="alert" *ngIf="status">Pago exitoso!</span>
+</div>

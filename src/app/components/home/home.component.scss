@@ -1,0 +1,172 @@
+.div-container {
+  height: 83vh;
+  background: #f0f0f0;
+  padding: 12px;
+  overflow-y: scroll;
+}
+
+h4 {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin: 0;
+  padding: 10px 0 0 10px;
+}
+
+.main-container {
+  background: white;
+  height: auto;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+}
+
+.main-category {
+  background: white;
+  height: auto;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+}
+
+.main-container h4,
+.main-category h4 {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin: 0;
+}
+
+.labels {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.labels-balance {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.aling-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.balance-price {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 250;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.used-price {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 250;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+hr {
+  margin: 30px 0 15px 0;
+  background: #c4c4c4;
+}
+
+.link-label {
+  margin-left: 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #ff731d;
+}
+
+.flex-align-center {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.month-label {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  color: #606060;
+}
+
+.card-charges-container {
+  display: flex;
+  margin-top: 30px;
+  max-width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.card-charges {
+  min-width: 50%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-charges label {
+  justify-content: center;
+  display: flex;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.card-charges a {
+  justify-content: center;
+  display: flex;
+  font-size: 20px;
+  color: #be6025;
+}
+
+.label-invertido {
+  font-size: 34px;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: #ff731d;
+  // margin-top: 20px;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+}
+
+.list-detail {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment-input {
+  border: none;
+  outline: none;
+}

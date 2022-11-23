@@ -1,0 +1,65 @@
+<h4 class="title">Perfil</h4>
+<div class="div-container">
+  <form [formGroup]="bankForm" novalidate (ngSubmit)="onSubmit()">
+    <main>
+      <h3>Información personal</h3>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+      </mat-form-field>
+
+      <hr />
+
+      <h3>Información bancaria</h3>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Fechas de corte </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div *ngFor="let card of user.cards">
+            <div style="display: flex; align-items: center">
+              <p style="width: fit-content; margin: 0 20px">{{ card.label }}</p>
+              <mat-form-field style="width: 50%" appearance="fill">
+                <mat-label>Dia de corte</mat-label>
+                <input matInput ngDefaultControl [formControlName]="card.value ? card.value : ''" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+
+      <mat-form-field appearance="outline">
+        <mat-label>Limite de inversion</mat-label>
+        <input matInput formControlName="investmentLimit" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Presupuesto del mes</mat-label>
+        <input matInput formControlName="budget" />
+      </mat-form-field>
+
+      <label for="">Métodos de pago</label>
+      <nz-select
+        [compareWith]="compareFn"
+        [nzMaxTagCount]="3"
+        nzMode="multiple"
+        nzPlaceHolder="Inserted are removed"
+        formControlName="cards"
+      >
+        <nz-option *ngFor="let card of listOfOption" [nzLabel]="card.label" [nzValue]="card"></nz-option>
+      </nz-select>
+
+      <br />
+      <br />
+      <div class="flex align-center">
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <mat-spinner *ngIf="loadingSaveProfile" style="zoom: 0.4; margin-left: 20px"></mat-spinner>
+      </div>
+    </main>
+  </form>
+</div>

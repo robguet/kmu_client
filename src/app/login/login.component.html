@@ -1,0 +1,60 @@
+<main>
+  <div class="logo">
+    <img src="../../assets/logo/logo.png" alt="Katch me Up" />
+  </div>
+
+  <div class="example-input">
+    <form
+      nz-form
+      [formGroup]="form"
+      novalidate
+      class="login-form"
+      (ngSubmit)="handleLogin()"
+    >
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="email"
+              placeholder="Email"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="Password"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <label
+        nz-checkbox
+        [(ngModel)]="checked"
+        (change)="checkValue(checked)"
+        formControlName="remember"
+        >Recordar contraseña</label
+      >
+
+      <button
+        nz-button
+        class="login-form-button login-form-margin"
+        [nzType]="'primary'"
+        type="submit"
+      >
+        Entrar &nbsp;
+        <i *ngIf="showLoading" class="fa fa-spinner fa-spin"></i>
+      </button>
+      O
+      <a routerLink="/register" style="color: black">Regístrate!</a>
+    </form>
+  </div>
+</main>

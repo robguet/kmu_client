@@ -1,0 +1,85 @@
+<h4 class="title">Nuevo Cargo</h4>
+<div class="div-container">
+  <div class="main-container">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="handleOnCreateCharge()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="title" name="title" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Dinero</mat-label>
+        <span style="font-size: 25px" matPrefix>$ &nbsp;</span>
+        <input type="number" matInput formControlName="money" name="money" />
+        <span style="font-size: 20px" matSuffix>MXN &nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Metodo de Pago</mat-label>
+        <mat-select formControlName="idCard" name="idCard">
+          <mat-option *ngFor="let card of creditCards" [value]="card.fk_idCard">
+            {{ card.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="FK_idCategory" name="FK_idCategory">
+          <mat-option
+            *ngFor="let category of categoriesList"
+            [value]="category?.idCategory"
+          >
+            {{ category.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-tab-group mat-align-tabs="start" (selectedTabChange)="onTabChange($event)">
+        <mat-tab label="Un Pago">
+          <mat-form-field class="example-half-width" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              formControlName="date"
+              name="date"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker2></mat-datepicker> </mat-form-field
+        ></mat-tab>
+
+        <mat-tab label="Pago a meses" >
+          <mat-form-field class="example-half-width" appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input  [rangePicker]="picker">
+              <input
+                matStartDate
+                formControlName="start"
+                placeholder="Start date"
+              />
+              <input matEndDate formControlName="end" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker
+              #picker
+            ></mat-date-range-picker> </mat-form-field
+        ></mat-tab>
+      </mat-tab-group>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-outline-primary m-2">
+          Crear &nbsp;
+          <i *ngIf="showLoading" class="fa fa-spinner fa-spin"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

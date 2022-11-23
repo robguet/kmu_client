@@ -1,0 +1,42 @@
+.logo {
+  width: 100%;
+  zoom: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+}
+
+main {
+  height: 100vh;
+  background-color: #ff731d;
+}
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.example-input {
+  display: flex;
+  justify-content: center;
+}
+
+.example-input .ant-input {
+  width: 200px;
+  border-radius: 15px;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 15px;
+}

@@ -1,0 +1,35 @@
+<div class="container-tabs">
+  <a class="box-style" [routerLink]="['/home']" [routerLinkActive]="['is-active']">
+    <div style="margin-bottom: 25%">
+      <div style="width: 100%; display: flex; justify-content: center">
+        <i class="fab fa-solid fa-house"></i>
+      </div>
+      <span class="button-span"> Inicio </span>
+    </div>
+  </a>
+  <a class="box-style" [routerLink]="['/new']" [routerLinkActive]="['is-active']">
+    <div style="margin-bottom: 25%">
+      <div style="width: 100%; display: flex; justify-content: center">
+        <i class="fas fa-plus"></i>
+      </div>
+      <span class="button-span"> Agregar </span>
+    </div>
+  </a>
+
+  <a class="box-style" [routerLink]="['/charges']" [routerLinkActive]="['is-active']">
+    <div style="margin-bottom: 25%">
+      <div style="width: 100%; display: flex; justify-content: center">
+        <i class="fab fa-bitcoin"></i>
+      </div>
+      <span class="button-span"> Gastos </span>
+    </div>
+  </a>
+  <a class="box-style" [routerLink]="['/profile']" [routerLinkActive]="['is-active']">
+    <div style="margin-bottom: 25%">
+      <div style="width: 100%; display: flex; justify-content: center">
+        <i class="fas fa-user"></i>
+      </div>
+      <span class="button-span"> Perfil </span>
+    </div>
+  </a>
+</div>

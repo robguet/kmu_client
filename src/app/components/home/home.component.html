@@ -1,0 +1,132 @@
+<div style="background: #f0f0f0">
+  <h4 class="title">Katch me Up</h4>
+</div>
+
+<div class="div-container">
+  <div class="main-container">
+    <div>
+      <div style="height: 56px">
+        <h4>Global</h4>
+        <label class="labels">{{ cardsLength }} tarjetas</label>
+      </div>
+      <div class="flex-container">
+        <div class="aling-center">
+          <nz-badge nzColor="geekblue"></nz-badge>
+          <label class="labels-balance">Presupuesto</label>
+        </div>
+
+        <label class="balance-price">{{ userBudget | currency }}</label>
+      </div>
+      <div class="flex-container">
+        <div class="aling-center">
+          <nz-badge nzColor="red"></nz-badge>
+          <label class="labels-balance">Gastado</label>
+        </div>
+
+        <label class="used-price">{{ totalBalance | currency }}</label>
+      </div>
+      <nz-progress
+        [nzPercent]="globalProgress.percent"
+        [nzStatus]="globalProgress.status"
+      ></nz-progress>
+
+      <div>
+        <mat-accordion>
+          <mat-expansion-panel
+            opened="true"
+            closed="false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <label class="labels-balance">Deuda</label>
+              </mat-panel-title>
+              <mat-panel-description>
+                Gastos en tarjetas de credito: {{ totalCreditCards | currency }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-list *ngFor="let card of creditCardsBalance">
+              <mat-list-item>
+                <div class="list-detail">
+                  <div>
+                    <nz-badge nzStatus="success"></nz-badge> {{ card.label }}
+                  </div>
+                  <div>
+                    {{ card.pendingBalance | currency }}
+                  </div>
+
+                  <div class="flex">
+                    <!-- <input class="payment-input" type="number" placeholder="Monto a depositar" /> -->
+                    <button (click)="handleOpenModal(card)" mat-raised-button>
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </mat-list-item>
+
+              <mat-divider></mat-divider>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <hr />
+      <div class="flex-align-center">
+        <!-- <mat-icon>credit_card</mat-icon> -->
+
+        <span class="material-icons orange600">credit_card</span>
+        <a class="link-label orange600" href="/profile">Ver tarjetas</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px" class="main-container">
+    <div class="flex-container">
+      <h4>Gastos</h4>
+      <div id="icons">
+        <span
+          *ngFor="let category of categoriesList"
+          class="material-icons"
+          style.color="{{ category?.color }}"
+          >{{ category?.icon }}</span
+        >
+      </div>
+    </div>
+    <label class="month-label">Mes Actual</label>
+
+    <div
+      class="card-charges-container"
+      [ngStyle]="{
+        'justify-content': balanceByCard.length == 1 ? 'center' : 'none'
+      }"
+    >
+      <div *ngFor="let card of balanceByCard" class="card-charges">
+        <label>{{ card.money | currency }}</label>
+        <br />
+        <a>{{ card.card }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 20px 0" class="main-category">
+    <div>
+      <div class="flex-container">
+        <h4>Invertido</h4>
+        <div id="icons">
+          <span class="material-icons investment">currency_exchange</span>
+        </div>
+      </div>
+      <label class="month-label">En el mes</label>
+
+      <div style="display: flex; justify-content: center">
+        <div class="label-invertido">
+          {{ totalInvestment | currency }}
+        </div>
+        <nz-progress
+          nzStrokeLinecap="square"
+          nzType="dashboard"
+          [nzPercent]="investmentProgress.percent"
+        ></nz-progress>
+      </div>
+    </div>
+  </div>
+</div>
