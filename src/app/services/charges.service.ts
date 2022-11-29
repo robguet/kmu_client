@@ -10,7 +10,7 @@ import {
   ICharges,
 } from '../interfaces/charges/charges.model';
 import { Endpoints } from '../interfaces/endpoints/endpoints';
-import { environment } from '../../environments/environment.dev';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

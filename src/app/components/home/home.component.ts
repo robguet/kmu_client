@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit {
   handleGetCurrentBill(): void {
     //SOLO MOSTRAMOS EL BALANCE DE TARJETAS, DESCARTAMOS EFECTIVO
     this.creditCardsBalance = this.creditCardsBalance.filter((card) => card.label !== 'Efectivo');
-
     //SUMAMOS EL BALANCE DE LAS TARJETAS
     this.creditCardsBalance.map((card) => {
       if (card.pendingBalance) {
@@ -91,7 +90,11 @@ export class HomeComponent implements OnInit {
     });
 
     //OBTENEMOS LO GASTADO EN EFECTIVO Y LO SUMAMOS A this.totalBalance PARA MOSTRARLO
-    const cash = this.balanceByCard.filter((method) => method.card === 'Efectivo');
+    let cash = this.balanceByCard.filter((method) => method.card === 'Efectivo');
+
+    if (cash.length == 0) {
+      cash = [{ money: 0, card: 'Efectivo' }];
+    }
     const [method] = cash;
 
     let { money } = method;
