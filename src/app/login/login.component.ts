@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { IProfile_Auth } from '../interfaces/user/user.interface';
 import { AuthService } from '../services/auth/auth.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -25,12 +24,12 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user = this.getLocalUser();
-    this.initForm(user);
+    const user = this.handleGetLocalUser();
+    this.handleInitForm(user);
   }
 
   //HELPERS
-  initForm(user: IProfile_Auth) {
+  handleInitForm(user: IProfile_Auth) {
     this.form = this._fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  checkValue(isChecked: boolean): boolean {
+  handleCheckValue(isChecked: boolean): boolean {
     if (!isChecked) {
       localStorage.removeItem('user');
     }
@@ -55,14 +54,14 @@ export class LoginComponent implements OnInit {
     return isChecked;
   }
 
-  getLocalUser(): IProfile_Auth {
+  handleGetLocalUser(): IProfile_Auth {
     const user: IProfile_Auth = JSON.parse(localStorage.getItem('user')!);
     return user || null;
   }
 
   //?SERVICE CALLS
 
-  async handleLogin(): Promise<any> {
+  async handleLogin(): Promise<void> {
     if (this.form.valid) {
       this.showLoading = true;
       try {
@@ -73,7 +72,7 @@ export class LoginComponent implements OnInit {
         if (this.checked == true) {
           localStorage.setItem('user', JSON.stringify(user));
         }
-        const { ok, token } = await firstValueFrom(await this._auth.login(user));
+        const { ok, token } = await this._auth.login(user);
         if (ok) {
           localStorage.setItem('token', token);
           this.router.navigate(['/home']);

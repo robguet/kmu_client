@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { IProfile_Auth } from '../interfaces/user/user.interface';
 import { AuthService } from '../services/auth/auth.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -14,7 +13,6 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class RegisterComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   showLoading = false;
-  registerSubs!: Subscription;
   config = new MatSnackBarConfig();
 
   constructor(
@@ -35,7 +33,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  signUp(): void {
+  async signUp(): Promise<any> {
     const { email, password, name, budget } = this.validateForm.value;
     const user: IProfile_Auth = {
       email,
@@ -44,20 +42,14 @@ export class RegisterComponent implements OnInit {
       budget,
     };
     this.showLoading = true;
-    this.registerSubs = this._auth.register(user).subscribe((data: any) => {
-      const { ok, token } = data;
-      if (ok) {
-        localStorage.setItem('token', token);
-        this.router.navigate(['/home']);
-        this.showLoading = false;
-      } else {
-        this.showLoading = false;
-        this._snackBar.open(data.message, 'cerrar', this.config);
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.registerSubs?.unsubscribe();
+    const data: any = await this._auth.register(user);
+    if (data.ok) {
+      localStorage.setItem('token', data.token);
+      this.router.navigate(['/home']);
+      this.showLoading = false;
+    } else {
+      this.showLoading = false;
+      this._snackBar.open(data.message, 'cerrar', this.config);
+    }
   }
 }

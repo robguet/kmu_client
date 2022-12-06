@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { NewChargeComponent } from './components/new-charge/new-charge.component';
-import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChargesComponent } from './components/charges/charges.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -57,7 +56,7 @@ registerLocaleData(en);
     HomeComponent,
     TabsComponent,
     NewChargeComponent,
-    HistoryComponent,
+
     ProfileComponent,
     ChargesComponent,
     HeaderComponent,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NzProgressStatusType } from 'ng-zorro-antd/progress';
-import { firstValueFrom } from 'rxjs';
 import { IBalanceByCard, IDates, ICategories, ICharges } from 'src/app/interfaces/charges/charges.model';
 import { ICredit_Card } from 'src/app/interfaces/user/user.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -60,9 +59,7 @@ export class HomeComponent implements OnInit {
   async handleGetChargesByCategory(category: number): Promise<void> {
     const { idUser, investmentLimit } = this.userInfo;
 
-    const chargesByCategory = await firstValueFrom(
-      await this._chargeService.getChargesCategory(idUser, this.dates, category),
-    );
+    const chargesByCategory = await this._chargeService.getChargesCategory(idUser, this.dates, category);
 
     this.totalInvestment = this.calculateTotalMoney(chargesByCategory);
     this.investmentProgress = this.calculateProgressBar(this.totalInvestment, investmentLimit) as progressBar;
@@ -70,12 +67,12 @@ export class HomeComponent implements OnInit {
 
   //OBTIENE LA LISTA DE CATEGORIA DE LA DB
   async handleGetCategoriesList(): Promise<void> {
-    this.categoriesList = await firstValueFrom(await this._chargeService.getCategories());
+    this.categoriesList = await this._chargeService.getCategories();
   }
 
   async handleGetChargesCurrentBill(): Promise<ICharges[]> {
     const { idUser } = this.userInfo;
-    return firstValueFrom(await this._chargeService.getBill(idUser, this.dates));
+    return this._chargeService.getBill(idUser, this.dates);
   }
 
   //?HELPERS FUNCTIONS

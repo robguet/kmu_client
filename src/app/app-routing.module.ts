@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewChargeComponent } from './components/new-charge/new-charge.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
-import { HistoryComponent } from './components/history/history.component';
 import { ChargesComponent } from './components/charges/charges.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
@@ -30,11 +29,6 @@ export const routes: Routes = [
   {
     path: 'new',
     component: NewChargeComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'history',
-    component: HistoryComponent,
     canActivate: [AuthGuard],
   },
   {

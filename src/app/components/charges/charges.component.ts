@@ -3,7 +3,6 @@ import { ChargesService } from 'src/app/services/charges.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IDates } from 'src/app/interfaces/charges/charges.model';
 import { ICredit_Card } from 'src/app/interfaces/user/user.interface';
-import { lastValueFrom } from 'rxjs';
 import { ICategories, ICharges } from '../../interfaces/charges/charges.model';
 
 export interface IChargesGraph {
@@ -48,7 +47,7 @@ export class ChargesComponent implements OnInit {
   async getChargesCurrentMonth(): Promise<void> {
     const { idUser } = this.userInfo;
     const currentBill$ = this._chargeService.getBill(idUser, this.dates);
-    this.charges = await lastValueFrom(await currentBill$);
+    this.charges = await currentBill$;
     this.totalBalance = this.calculateTotalBalance(this.charges);
     this.createChargesGraph(this.charges);
   }
@@ -64,7 +63,7 @@ export class ChargesComponent implements OnInit {
     this.totalBalance = 0;
 
     const { idUser } = this.userInfo;
-    this.charges = await lastValueFrom(await this._chargeService.getChargesCategory(idUser, this.dates, category));
+    this.charges = await this._chargeService.getChargesCategory(idUser, this.dates, category);
     //DE TODOS LOS ARRAYS QUE HACEMOS SEPARADOS POR EL METODO DE PAGO, SE UNE PARA HACER UNO
 
     this.createChargesGraph(this.charges);
@@ -87,9 +86,7 @@ export class ChargesComponent implements OnInit {
     //OBTIENE LA INFORMACION DEL METODO DE PAGO QUE SE HAYA SELECCIONADO DEL paymentMethod EN this.dates
     const billingDate = this.dates.filter((date) => date.idCard === paymentMethod);
 
-    this.charges = await lastValueFrom(
-      await this._chargeService.getChargesytMethod(idUser, billingDate.pop(), paymentMethod),
-    );
+    this.charges = await this._chargeService.getChargesytMethod(idUser, billingDate.pop(), paymentMethod);
     this.createChargesGraph(this.charges);
     this.totalBalance = this.calculateTotalBalance(this.charges);
   }
@@ -128,14 +125,14 @@ export class ChargesComponent implements OnInit {
       }
     });
 
-    this.charges = await lastValueFrom(await this._chargeService.getBill(idUser, arraynewDates));
+    this.charges = await this._chargeService.getBill(idUser, arraynewDates);
 
     this.createChargesGraph(this.charges);
     this.totalBalance = this.calculateTotalBalance(this.charges);
   }
 
   async handleGetCategories(): Promise<void> {
-    this.categories = await lastValueFrom(await this._chargeService.getCategories());
+    this.categories = await this._chargeService.getCategories();
     this.enumIcons = this.categories.reduce((obj, item) => Object.assign(obj, { [item.label]: item.icon }), {});
     this.enumColors = this.categories.reduce((obj, item) => Object.assign(obj, { [item.label]: item.color }), {});
   }

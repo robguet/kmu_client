@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import {
   ICategories_List,
   INew_Charge,
@@ -27,28 +27,31 @@ export class ChargesService {
   }
 
   //PROMISES
-  async getCategories(): Promise<Observable<ICategories[]>> {
-    return this.http.get<ICategories[]>(`${environment.baseUrl}${Endpoints.GET_CATEGORIES}`);
+  async getCategories(): Promise<ICategories[]> {
+    return firstValueFrom(this.http.get<ICategories[]>(`${environment.baseUrl}${Endpoints.GET_CATEGORIES}`));
   }
 
-  async getBill(idUser: number | undefined, dates: any): Promise<Observable<ICharges[]>> {
-    return this.http.post<ICharges[]>(`${environment.baseUrl}charges/${idUser}/get`, dates);
+  async getBill(idUser: number | undefined, dates: any): Promise<ICharges[]> {
+    return firstValueFrom(this.http.post<ICharges[]>(`${environment.baseUrl}charges/${idUser}/get`, dates));
   }
 
-  async getChargesCategory(
-    idUser: number | undefined,
-    dates: any,
-    FK_idCategory: number,
-  ): Promise<Observable<ICharges[]>> {
-    return this.http.post<ICharges[]>(`${environment.baseUrl}charges/${idUser}/get/${FK_idCategory}`, dates);
+  async getChargesCategory(idUser: number | undefined, dates: any, FK_idCategory: number): Promise<ICharges[]> {
+    return firstValueFrom(
+      this.http.post<ICharges[]>(`${environment.baseUrl}charges/${idUser}/get/${FK_idCategory}`, dates),
+    );
   }
 
-  async getChargesytMethod(idUser: number | undefined, dates: any, fk_idCard: number): Promise<Observable<ICharges[]>> {
-    return this.http.post<ICharges[]>(`${environment.baseUrl}charges/${idUser}/get/byPaymentMethod/${fk_idCard}`, dates);
+  async getChargesytMethod(idUser: number | undefined, dates: any, fk_idCard: number): Promise<ICharges[]> {
+    return firstValueFrom(
+      this.http.post<ICharges[]>(`${environment.baseUrl}charges/${idUser}/get/byPaymentMethod/${fk_idCard}`, dates),
+    );
   }
 
-  async createCharge(charge: INew_Charge, isMonthly: boolean): Promise<Observable<INew_Charge_Response>> {
-    return this.http.post<INew_Charge_Response>(`${environment.baseUrl}${Endpoints.NEW_CHARGE}`, { ...charge, isMonthly });
+  async createCharge(charge: INew_Charge, isMonthly: boolean): Promise<INew_Charge_Response> {
+    return firstValueFrom(this.http.post<INew_Charge_Response>(`${environment.baseUrl}${Endpoints.NEW_CHARGE}`, {
+      ...charge,
+      isMonthly,
+    }));
   }
 
   //?GETTERS & SETTERS

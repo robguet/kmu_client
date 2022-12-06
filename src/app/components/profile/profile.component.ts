@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { cardsList } from 'src/app/interfaces/const';
 import { IUser_Profile } from 'src/app/interfaces/user/user.interface';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -38,13 +37,12 @@ export class ProfileComponent implements OnInit {
       ...this.bankForm.value,
       idUser: this.user.idUser,
     };
-    const cardsInfo: number[][] = this.user?.cards.map((control) => {
-      return [this.bankForm.get(control.value).value, this.user.idUser, control.fk_idCard];
+    const cardsInfo: number[][] = this.user?.cards.map((creditCard) => {
+      return [this.bankForm.get(creditCard.value).value, this.user.idUser, creditCard.fk_idCard];
     });
+    await this._auth.updateCutoffDate(cardsInfo);
 
-    await lastValueFrom(await this._auth.updateCutoffDate(cardsInfo));
-
-    const res = await lastValueFrom(await this._auth.updateProfile(profile));
+    await this._auth.updateProfile(profile);
     const config = new MatSnackBarConfig();
     config.duration = 2000;
     config.verticalPosition = 'bottom';

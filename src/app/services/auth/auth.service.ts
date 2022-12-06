@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
+import { of, Observable, firstValueFrom } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
   IAuthenticated_Response,
@@ -35,20 +35,22 @@ export class AuthService {
     );
   }
 
-  register(user: IProfile_Auth): Observable<IUser_Response> {
-    return this.http.post<IUser_Response>(`${environment.baseUrl}${Endpoints.SIGN_UP}`, user);
+  register(user: IProfile_Auth): Promise<IUser_Response> {
+    return firstValueFrom(this.http.post<IUser_Response>(`${environment.baseUrl}${Endpoints.SIGN_UP}`, user));
   }
 
-  async login(user: IProfile_Auth): Promise<Observable<ILogin>> {
-    return this.http.post<ILogin>(`${environment.baseUrl}${Endpoints.SIGN_IN}`, user);
+  async login(user: IProfile_Auth): Promise<ILogin> {
+    return firstValueFrom(this.http.post<ILogin>(`${environment.baseUrl}${Endpoints.SIGN_IN}`, user));
   }
 
   async updateProfile(profile: IUser_Profile): Promise<any> {
-    return this.http.post(`${environment.baseUrl}${Endpoints.UPDATE_PROFILE}/${profile.idUser}`, profile);
+    return firstValueFrom(
+      this.http.post(`${environment.baseUrl}${Endpoints.UPDATE_PROFILE}/${profile.idUser}`, profile),
+    );
   }
 
   async updateCutoffDate(array: number[][]): Promise<any> {
-    return this.http.post(`${environment.baseUrl}${Endpoints.UPDATE_CUTOFF}`, array);
+    return firstValueFrom(this.http.post(`${environment.baseUrl}${Endpoints.UPDATE_CUTOFF}`, array));
   }
 
   //?GETTERS & SETTERS

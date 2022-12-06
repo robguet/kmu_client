@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ChargesService } from 'src/app/services/charges.service';
-import { Subscription, firstValueFrom, lastValueFrom } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ICategories, INew_Charge } from 'src/app/interfaces/charges/charges.model';
 import { ICredit_Card, IUser_Profile } from 'src/app/interfaces/user/user.interface';
@@ -74,10 +74,10 @@ export class NewChargeComponent implements OnInit {
       idUser,
       date: new Date(this.newCharge?.date), //.toDateString()
     };
-    const { ok } = await firstValueFrom(await this._chargeService.createCharge(charge, this.isMonthly));
+    const { ok } = await this._chargeService.createCharge(charge, this.isMonthly);
     this._chargeService.newChargeCreated.next(ok);
     this.showLoading = false;
-    this._snackBar.open(ok ? 'Cargo creado!' : 'Error', 'cerrar', this.config);
+    this._snackBar.open('Cargo creado!', 'cerrar', this.config);
     // this.initForm();
   }
 
@@ -91,7 +91,7 @@ export class NewChargeComponent implements OnInit {
       if (chargesLength >= 1) {
         this.isMonthly = true;
       }
-      await firstValueFrom(await this._chargeService.createCharge(charge, this.isMonthly));
+      await this._chargeService.createCharge(charge, this.isMonthly);
 
       this._chargeService.newChargeCreated.next(true);
       this.showLoading = false;
@@ -102,7 +102,7 @@ export class NewChargeComponent implements OnInit {
   }
 
   async getCategories(): Promise<void> {
-    this.categoriesList = await firstValueFrom(await this._chargeService.getCategories());
+    this.categoriesList = await this._chargeService.getCategories();
     return;
   }
 
