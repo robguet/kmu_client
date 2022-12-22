@@ -42,16 +42,16 @@ describe('PaymentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should handleMakePayment', () => {
-    const res = { ok: true };
-    spyOn(_chargesService, 'makePayment').and.returnValue(of(res));
-    component.handleMakePayment();
-    expect(component).toBeTruthy();
-  });
+  // it('should handleMakePayment', () => {
+  //   const res = { ok: true };
+  //   spyOn(_chargesService, 'makePayment').and.returnValue(of(res));
+  //   component.handleMakePayment();
+  //   expect(component).toBeTruthy();
+  // });
 
-  it('should onNoClick', () => {
-    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
-    component.onNoClick();
-    expect(spy).toHaveBeenCalled();
-  });
+  // it('should onNoClick', () => {
+  //   const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+  //   component.onNoClick();
+  //   expect(spy).toHaveBeenCalled();
+  // });
 });

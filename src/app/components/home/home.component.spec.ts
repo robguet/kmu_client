@@ -8,7 +8,7 @@ import { ChargesService } from 'src/app/services/charges.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
-fdescribe('HomeComponent', () => {
+describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let _chargesService: ChargesService;

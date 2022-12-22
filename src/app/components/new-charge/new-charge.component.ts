@@ -64,7 +64,6 @@ export class NewChargeComponent implements OnInit {
 
     //STARTS MONTHLY PAYMENTS
     if (this.isMonthlyPayment == 1) {
-      console.log(this.isMonthlyPayment);
       this.handleCreateMonthlyCharges(start, end);
     }
 

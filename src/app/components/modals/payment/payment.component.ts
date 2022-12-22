@@ -12,6 +12,9 @@ export class PaymentComponent {
   amount!: number;
   status = false;
   payment!: IPayment;
+  pendingBalance = this.data.pendingBalance;
+  isDisabled = true;
+
   constructor(
     private _chargesService: ChargesService,
     public dialogRef: MatDialogRef<PaymentComponent>,
@@ -20,6 +23,20 @@ export class PaymentComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  handleChangeInput() {
+    if (this.amount == null) {
+      this.pendingBalance = this.data.pendingBalance;
+      this.isDisabled = true;
+      return;
+    }
+    this.isDisabled = false;
+    this.pendingBalance = this.data.pendingBalance - this.amount;
+    if (this.pendingBalance < 0) {
+      this.isDisabled = true;
+      return;
+    }
   }
 
   //SERVICES
