@@ -48,10 +48,20 @@ export class ChargesService {
   }
 
   async createCharge(charge: INew_Charge, isMonthly: boolean): Promise<INew_Charge_Response> {
-    return firstValueFrom(this.http.post<INew_Charge_Response>(`${environment.baseUrl}${Endpoints.NEW_CHARGE}`, {
-      ...charge,
-      isMonthly,
-    }));
+    return firstValueFrom(
+      this.http.post<INew_Charge_Response>(`${environment.baseUrl}${Endpoints.NEW_CHARGE}`, {
+        ...charge,
+        isMonthly,
+      }),
+    );
+  }
+
+  async deleteCharge(charge: INew_Charge): Promise<any> {
+    return firstValueFrom(
+      this.http.post<any>(`${environment.baseUrl}${Endpoints.DELETE_CHARGE}`, {
+        ...charge,
+      }),
+    );
   }
 
   //?GETTERS & SETTERS

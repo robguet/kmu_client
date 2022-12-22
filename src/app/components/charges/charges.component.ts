@@ -137,6 +137,11 @@ export class ChargesComponent implements OnInit {
     this.enumColors = this.categories.reduce((obj, item) => Object.assign(obj, { [item.label]: item.color }), {});
   }
 
+  async handleDeleteCharge(charge: ICharges) {
+    console.log(charge);
+    // await this._chargeService.deleteCharge(charge);
+  }
+
   //?HELPERS FUNCTIONS
   calculateTotalBalance(data: ICharges[] | IChargesGraph[]): number {
     let totalMoney = 0;

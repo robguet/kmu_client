@@ -64,8 +64,8 @@ nz-select {
 }
 
 .cl-45 {
-  max-width: 45%;
-  min-width: 45%;
+  max-width: 40%;
+  min-width: 40%;
 }
 
 .cl-25 {
@@ -116,4 +116,9 @@ nz-select {
     display: flex;
     overflow: auto;
   }
+}
+
+button{
+  border: none;
+  background: transparent;
 }

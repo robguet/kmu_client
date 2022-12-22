@@ -68,6 +68,8 @@
         <span class="cl-15 center">${{ charge?.money }}</span>
 
         <label class="cl-25 center">{{ charge.date | date: 'mediumDate':'UTC' }}</label>
+
+        <button (click)="handleDeleteCharge(charge)" >x</button>
       </div>
     </div>
   </div>

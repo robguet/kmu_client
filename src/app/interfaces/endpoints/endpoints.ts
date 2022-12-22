@@ -7,4 +7,5 @@ export enum Endpoints {
   UPDATE_PROFILE = 'aut/update/user',
   UPDATE_CUTOFF = 'aut/cutOff',
   START_SERVER = 'aut/startServer',
+  DELETE_CHARGE = 'aut/delete/charge',
 }

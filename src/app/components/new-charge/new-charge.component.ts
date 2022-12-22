@@ -64,7 +64,7 @@ export class NewChargeComponent implements OnInit {
 
     //STARTS MONTHLY PAYMENTS
     if (this.isMonthlyPayment == 1) {
-      this.handleCreateMonthlyCharges(start, end);
+      return this.handleCreateMonthlyCharges(start, end);
     }
 
     //STARTS ONETIME PAYMENT
@@ -90,7 +90,9 @@ export class NewChargeComponent implements OnInit {
       if (chargesLength >= 1) {
         this.isMonthly = true;
       }
-      await this._chargeService.createCharge(charge, this.isMonthly);
+
+      console.log(charge, this.isMonthly)
+      // await this._chargeService.createCharge(charge, this.isMonthly);
 
       this._chargeService.newChargeCreated.next(true);
       this.showLoading = false;
